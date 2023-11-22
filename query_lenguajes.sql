@@ -1,0 +1,3 @@
+CREATE TABLE empleado(
+    EmpleadoID INT AUTO_INCREMENT PRIMARY KEY
+);
