@@ -35,6 +35,23 @@ CREATE TABLE IF NOT EXISTS forma_pago (
     Descripcion VARCHAR(30)
 );
 
+-- Tabla proveedor
+CREATE TABLE IF NOT EXISTS proveedor (
+    ProveedorID INT PRIMARY KEY AUTO_INCREMENT,
+    NombreProveedor VARCHAR(35),
+    Telefono VARCHAR(20),
+    Correo VARCHAR(50)
+);
+
+-- Tabla producto
+CREATE TABLE IF NOT EXISTS producto (
+    ProductoID INT PRIMARY KEY AUTO_INCREMENT,
+    NombreProducto VARCHAR(80),
+    Precio DECIMAL(10, 2),
+    ProveedorID INT,
+    FOREIGN KEY (ProveedorID) REFERENCES proveedor(ProveedorID)
+);
+
 -- Tabla orden
 CREATE TABLE IF NOT EXISTS orden (
     OrdenID INT PRIMARY KEY AUTO_INCREMENT,
@@ -69,23 +86,6 @@ CREATE TABLE IF NOT EXISTS factura (
     FechaPago DATE,
     FOREIGN KEY (OrdenID) REFERENCES orden(OrdenID),
     FOREIGN KEY (FormaPagoID) REFERENCES forma_pago(FormaPagoID)
-);
-
--- Tabla proveedor
-CREATE TABLE IF NOT EXISTS proveedor (
-    ProveedorID INT PRIMARY KEY AUTO_INCREMENT,
-    NombreProveedor VARCHAR(35),
-    Telefono VARCHAR(20),
-    Correo VARCHAR(50)
-);
-
--- Tabla producto
-CREATE TABLE IF NOT EXISTS producto (
-    ProductoID INT PRIMARY KEY AUTO_INCREMENT,
-    NombreProducto VARCHAR(80),
-    Precio DECIMAL(10, 2),
-    ProveedorID INT,
-    FOREIGN KEY (ProveedorID) REFERENCES proveedor(ProveedorID)
 );
 
 -- Tabla ingrediente

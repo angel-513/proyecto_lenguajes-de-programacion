@@ -10,15 +10,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "cliente")
-@Setter
+@Table(name = "empleado")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cliente {
+public class Empleado {
     @Id
-    @Column(name = "clienteid")
-    private int ClienteID;
+    @Column(name = "empleadoid")
+    private int EmpleadoID;
 
     @Column(name = "pnombre")
     private String primer_nombre;
@@ -31,4 +31,9 @@ public class Cliente {
 
     @Column(name = "sapellido")
     private String segundo_apellido;
+
+    private double sueldo;
+
+    //==============HACER LA RELACION==============//
+    private int CargoID;
 }
