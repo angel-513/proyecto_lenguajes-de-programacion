@@ -1,4 +1,4 @@
-package restaurante.lenguajes.restaurante.services.Impl;
+package restaurante.lenguajes.restaurante.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

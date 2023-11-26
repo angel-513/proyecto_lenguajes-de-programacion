@@ -1,4 +1,4 @@
-package restaurante.lenguajes.restaurante.services.Impl;
+package restaurante.lenguajes.restaurante.services.impl;
 
 import java.util.Date;
 import java.util.List;
