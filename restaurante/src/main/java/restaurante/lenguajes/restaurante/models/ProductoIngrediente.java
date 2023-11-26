@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,18 +20,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductoIngrediente {
-    //==============HACER LA RELACION==============//
     @Id
-    @Column(name = "ingredienteid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int IngredienteID;
+    @Column(name = "productoxingredienteid")
+    private int productoXIngredienteID;
 
-    //==============HACER LA RELACION==============//
-    @Id
-    @Column(name = "productoid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ProductoID;
+    @ManyToOne
+    @JoinColumn(name = "ingrediente", referencedColumnName = "ingredienteid")
+    private Ingrediente ingrediente;
+
+    @ManyToOne
+    @JoinColumn(name = "producto", referencedColumnName = "productoid")
+    private Producto producto;
 
     @Column(name = "cantidadunidades")
-    private double CantidadUnidades;
+    private double CantidadUtilizada;
 }

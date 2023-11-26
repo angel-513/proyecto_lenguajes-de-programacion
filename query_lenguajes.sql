@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS cargo (
 
 -- Tabla empleado
 CREATE TABLE IF NOT EXISTS empleado (
-    EmpleadoID INT PRIMARY KEY AUTO_INCREMENT,
+    DNI INT PRIMARY KEY AUTO_INCREMENT,
     PNombre VARCHAR(25),
     SNombre VARCHAR(25),
     PApellido VARCHAR(25),
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS empleado (
 
 -- Tabla cliente
 CREATE TABLE IF NOT EXISTS cliente (
-    ClienteID INT PRIMARY KEY AUTO_INCREMENT,
+    DNI INT PRIMARY KEY AUTO_INCREMENT,
     PNombre VARCHAR(25),
     SNombre VARCHAR(25),
     PApellido VARCHAR(25),
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS cliente (
 );
 
 -- Tabla forma_pago
-CREATE TABLE IF NOT EXISTS forma_pago (
+CREATE TABLE IF NOT EXISTS formaPago (
     FormaPagoID INT PRIMARY KEY AUTO_INCREMENT,
     Descripcion VARCHAR(30)
 );
@@ -48,28 +48,24 @@ CREATE TABLE IF NOT EXISTS producto (
     ProductoID INT PRIMARY KEY AUTO_INCREMENT,
     NombreProducto VARCHAR(80),
     Precio DECIMAL(10, 2),
-    ProveedorID INT,
-    FOREIGN KEY (ProveedorID) REFERENCES proveedor(ProveedorID)
 );
 
 -- Tabla orden
 CREATE TABLE IF NOT EXISTS orden (
     OrdenID INT PRIMARY KEY AUTO_INCREMENT,
-    ClienteID INT,
-    MeseroID INT,
+    DNI INT,
     CajeroID INT,
     fechaOrden DATE,
-    FOREIGN KEY (ClienteID) REFERENCES cliente(ClienteID),
-    FOREIGN KEY (MeseroID) REFERENCES empleado(EmpleadoID),
+    FOREIGN KEY (dni) REFERENCES cliente(dni),
     FOREIGN KEY (CajeroID) REFERENCES empleado(EmpleadoID)
 );
 
 -- Tabla detalleOrden
 CREATE TABLE IF NOT EXISTS detalleOrden (
+    DetalleOrdenID INT PRIMARY KEY AUTO_INCREMENT,
     OrdenID INT,
     ProductoID INT,
     Cantidad INT,
-    PRIMARY KEY (OrdenID, ProductoID),
     FOREIGN KEY (OrdenID) REFERENCES orden(OrdenID),
     FOREIGN KEY (ProductoID) REFERENCES producto(ProductoID)
 );
@@ -92,18 +88,19 @@ CREATE TABLE IF NOT EXISTS factura (
 CREATE TABLE IF NOT EXISTS ingrediente (
     IngredienteID INT PRIMARY KEY AUTO_INCREMENT,
     NombreIngrediente VARCHAR(40),
-    PrecioIngredienteXUnidad DECIMAL(10, 2),
-    DescripcionUnidad VARCHAR(50), --Si es por kg, unidades, gramos, etc.
-    CantidadAlmacen DECIMAL(10, 2), --Cantidad de unidades
-    StockMinimo DECIMAL(10, 2) --Para saber cuando el restaurante tiene que comprar mas
+    DescripcionUnidad VARCHAR(50),
+    CantidadAlmacen DECIMAL(10, 2),
+    StockMinimo DECIMAL(10, 2),
+    ProveedorID INT,
+    FOREIGN KEY (ProveedorID) REFERENCES proveedor(ProveedorID)
 );
 
 -- Tabla productoIngrediente
 CREATE TABLE IF NOT EXISTS productoIngrediente (
-    ProductoID INT,
-    IngredienteID INT,
+    productoXIngredienteID INT PRIMARY KEY AUTO_INCREMENT,
+    Producto INT,
+    Ingrediente INT,
     CantidadUnidades DECIMAL(10, 2),
-    PRIMARY KEY (ProductoID, IngredienteID),
     FOREIGN KEY (ProductoID) REFERENCES producto(ProductoID),
     FOREIGN KEY (IngredienteID) REFERENCES ingrediente(IngredienteID)
 );
@@ -118,12 +115,10 @@ CREATE TABLE IF NOT EXISTS compra (
 
 -- Tabla detalleCompra
 CREATE TABLE IF NOT EXISTS detalleCompra (
+    DetalleCompraID INT PRIMARY KEY AUTO_INCREMENT,
     CompraID INT,
-    ProductoID INT,
     Cantidad INT,
-    ProveedorID INT,
-    PRIMARY KEY (CompraID, ProductoID),
+    IngredienteID INT,
     FOREIGN KEY (CompraID) REFERENCES compra(CompraID),
-    FOREIGN KEY (ProductoID) REFERENCES producto(ProductoID),
-    FOREIGN KEY (ProveedorID) REFERENCES proveedor(ProveedorID)
+    FOREIGN KEY (IngredienteID) REFERENCES ingrediente(IngredienteID)
 );

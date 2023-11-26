@@ -1,12 +1,16 @@
 package restaurante.lenguajes.restaurante.models;
 
-import java.sql.Date;
+import java.util.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,12 +32,17 @@ public class Orden {
     @Column(name = "fechaorden")
     private Date fechaOrden;
 
-    //==============HACER LA RELACION==============//
-    private int ClienteID;
+    @ManyToOne
+    @JoinColumn(name = "dni", referencedColumnName = "dni")
+    private Cliente cliente;
 
-    //==============HACER LA RELACION==============//
-    private int MeseroID;
+    @ManyToOne
+    @JoinColumn(name = "cajeroid", referencedColumnName = "dni")
+    private Empleado cajero;
 
-    //==============HACER LA RELACION==============//
-    private int CajeroID;
+    @OneToOne(mappedBy = "orden", cascade = CascadeType.ALL)
+    private DetalleOrden detalleOrden;
+
+    @OneToOne(mappedBy = "orden", cascade = CascadeType.ALL)
+    private Factura factura;
 }

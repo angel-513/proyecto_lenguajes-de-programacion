@@ -18,19 +18,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DetalleCompra {
-    //==============HACER LA RELACION==============//
     @Id
-    @Column(name = "compraid")
+    @Column(name = "detallecompraid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int CompraID;
+    private int DetalleCompraID;
 
     //==============HACER LA RELACION==============//
-    @Column(name = "productoid")
-    private int ProductoID;
+    @Column(name = "ingredienteid")
+    private int IngredienteID;
 
     //==============HACER LA RELACION==============//
-    @Column(name = "proveedorid")
-    private int ProveedorID;
+    @Column(name = "compraid")
+    private int compraID;
 
     private int cantidad;
 }

@@ -27,7 +27,4 @@ public class Producto {
     private String NombreProducto;
 
     private double precio;
-
-    //==============HACER LA RELACION==============//
-    private int ProveedorID;
 }

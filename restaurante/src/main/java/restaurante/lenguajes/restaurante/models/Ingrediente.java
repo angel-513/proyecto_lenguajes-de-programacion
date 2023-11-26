@@ -1,10 +1,14 @@
 package restaurante.lenguajes.restaurante.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,9 +30,6 @@ public class Ingrediente {
     @Column(name = "nombreingrediente")
     private String NombreIngrediente;
 
-    @Column(name = "precioingredientexunidad")
-    private double PrecioIngrediete;
-
     @Column(name = "descripcionunidad")
     private String DescripcionUnidad;
 
@@ -37,4 +38,9 @@ public class Ingrediente {
 
     @Column(name = "stockminimo")
     private double StockMinimo;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "proveedorid", referencedColumnName = "proveedorid")
+    private Proveedor proveedor;
 }

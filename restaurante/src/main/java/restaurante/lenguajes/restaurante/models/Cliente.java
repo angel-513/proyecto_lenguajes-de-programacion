@@ -17,18 +17,18 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Cliente {
     @Id
-    @Column(name = "clienteid")
-    private int ClienteID;
+    @Column(name = "dni")
+    private String dni;
 
     @Column(name = "pnombre")
-    private String primer_nombre;
+    private String primerNombre;
 
     @Column(name = "snombre")
-    private String segundo_nombre;
+    private String segundoNombre;
 
     @Column(name = "papellido")
-    private String primer_apellido;
+    private String primerApellido;
 
     @Column(name = "sapellido")
-    private String segundo_apellido;
+    private String segundoApellido;
 }

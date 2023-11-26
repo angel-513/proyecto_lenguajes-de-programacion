@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,24 +21,25 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Empleado {
     @Id
-    @Column(name = "empleadoid")
+    @Column(name = "dni")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int EmpleadoID;
+    private String dni;
 
     @Column(name = "pnombre")
-    private String primer_nombre;
+    private String primerNombre;
 
     @Column(name = "snombre")
-    private String segundo_nombre;
+    private String segundoNombre;
 
     @Column(name = "papellido")
-    private String primer_apellido;
+    private String primerApellido;
 
     @Column(name = "sapellido")
-    private String segundo_apellido;
+    private String segundoApellido;
 
     private double sueldo;
 
-    //==============HACER LA RELACION==============//
-    private int CargoID;
+    @ManyToOne
+    @JoinColumn(name = "cargodi", referencedColumnName = "cargoid")
+    private Cargo cargo;
 }

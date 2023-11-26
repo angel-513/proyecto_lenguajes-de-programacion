@@ -1,12 +1,17 @@
 package restaurante.lenguajes.restaurante.models;
 
-import java.sql.Date;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +30,10 @@ public class Factura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int FacturaID;
 
-    //==============HACER LA RELACION==============//
-    private int OrdenID;
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "ordenid", referencedColumnName = "ordenid")
+    private Orden orden;
 
     private double total;
 
@@ -39,6 +46,7 @@ public class Factura {
     @Column(name = "fechapago")
     private Date FechaPago;
 
-    //==============HACER LA RELACION==============//
-    private int FormaPagoID;
+    @ManyToOne
+    @JoinColumn(name = "formapagoid", referencedColumnName = "formapagoid")
+    private FormaPago formaPago;
 }
