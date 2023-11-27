@@ -27,4 +27,7 @@ public class Producto {
     private String NombreProducto;
 
     private double precio;
+
+    @Column(name = "imagen")
+    private String imagen;
 }

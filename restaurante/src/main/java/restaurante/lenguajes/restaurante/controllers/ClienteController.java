@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import restaurante.lenguajes.restaurante.models.Cliente;
-import restaurante.lenguajes.restaurante.services.Impl.ClienteServiceImpl;
+import restaurante.lenguajes.restaurante.services.impl.ClienteServiceImpl;
 
 @RestController
 @RequestMapping("/api/restaurante/cliente")

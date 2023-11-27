@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import restaurante.lenguajes.restaurante.dtos.FacturaDTO;
 import restaurante.lenguajes.restaurante.models.Factura;
-import restaurante.lenguajes.restaurante.services.Impl.FacturaServiceImpl;
+import restaurante.lenguajes.restaurante.services.impl.FacturaServiceImpl;
 
 @RestController
 @RequestMapping("/api/restaurante/factura")

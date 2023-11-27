@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import restaurante.lenguajes.restaurante.models.ProductoIngrediente;
-import restaurante.lenguajes.restaurante.services.Impl.ProducIngrServiceImpl;
+import restaurante.lenguajes.restaurante.services.impl.ProducIngrServiceImpl;
 
 @RestController
 @RequestMapping("/api/restaurante/ingredientesXProducto")

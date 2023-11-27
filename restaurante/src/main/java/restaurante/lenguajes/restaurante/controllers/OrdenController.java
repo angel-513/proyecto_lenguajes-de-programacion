@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import restaurante.lenguajes.restaurante.dtos.OrdenDTO;
 import restaurante.lenguajes.restaurante.models.Orden;
-import restaurante.lenguajes.restaurante.services.Impl.OrdenServiceImpl;
+import restaurante.lenguajes.restaurante.services.impl.OrdenServiceImpl;
 
 @RestController
 @RequestMapping("/api/restaurante/orden")
