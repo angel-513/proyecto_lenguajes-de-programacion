@@ -1,6 +1,7 @@
 package hn.unah.lenguajes.restaurante.models;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -41,8 +43,8 @@ public class Orden {
     @JoinColumn(name = "cajeroid", referencedColumnName = "dni")
     private Empleado cajero;
 
-    @OneToOne(mappedBy = "orden", cascade = CascadeType.ALL)
-    private DetalleOrden detalleOrden;
+    @OneToMany(mappedBy = "orden", cascade = CascadeType.ALL)
+    private List<DetalleOrden> detallesOrden;
 
     @OneToOne(mappedBy = "orden", cascade = CascadeType.ALL)
     private Factura factura;

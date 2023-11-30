@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hn.unah.lenguajes.restaurante.models.ProductoIngrediente;
@@ -18,8 +18,8 @@ public class ProducIngrController {
     @Autowired
     private ProducIngrServiceImpl pIngrServiceImpl;
 
-    @GetMapping("/obtenerIngredientes/{id}")
-    public List<ProductoIngrediente> obtenerIngredientesPlatillo(@PathVariable(name = "id") int id){
+    @GetMapping("/obtener")
+    public List<ProductoIngrediente> obtenerIngredientesPlatillo(@RequestParam(name = "idProducto") int id){
         return this.pIngrServiceImpl.obtenerIngredientesPlatillo(id); 
     }
 

@@ -17,7 +17,7 @@ public class FacturaController {
     @Autowired
     FacturaServiceImpl facturaServiceImpl;
     
-    @PostMapping("guardar")
+    @PostMapping("/guardar")
     public Factura generarFactura(@RequestBody FacturaDTO datos){
         return this.facturaServiceImpl.generarFactura(datos);
     }

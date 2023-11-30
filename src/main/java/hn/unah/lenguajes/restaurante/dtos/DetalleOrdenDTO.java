@@ -1,7 +1,5 @@
 package hn.unah.lenguajes.restaurante.dtos;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,12 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrdenDTO {
-    
-    private String dni;
+public class DetalleOrdenDTO {
+    private int producto;
 
-    private String cajeroId;
-
-    private List<DetalleOrdenDTO> productos;
-
+    private int cantidad;
 }

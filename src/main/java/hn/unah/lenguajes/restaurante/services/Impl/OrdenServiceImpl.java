@@ -1,11 +1,13 @@
 package hn.unah.lenguajes.restaurante.services.Impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import hn.unah.lenguajes.restaurante.dtos.DetalleOrdenDTO;
 import hn.unah.lenguajes.restaurante.dtos.OrdenDTO;
 import hn.unah.lenguajes.restaurante.models.Cliente;
 import hn.unah.lenguajes.restaurante.models.DetalleOrden;
@@ -36,46 +38,50 @@ public class OrdenServiceImpl implements OrdenService{
 
     @Autowired
     private ProducIngrServiceImpl producIngrServiceImpl;
-    
+
     @Override
     public Orden incluirOrden(OrdenDTO datos) {
-
         Empleado empleado = this.buscarEmpleado(datos.getCajeroId());
 
         if (empleado != null) {
+            Orden orden = new Orden();
+            List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
+            orden.setDetallesOrden(detalles);
+            orden.setCajero(empleado);
             
-            Cliente cliente = this.buscarCliente(datos.getDni());
+            //No verificaremos si el cliente existe, quedará opcional colocar sus datos, pero si se verificará el contenido del dato por medio de una expresión regular
+            if (datos.getDni().matches("(\\d){13}")) {
+                orden.setCliente(this.buscarCliente(datos.getDni()));
+            }
 
-            if (cliente != null) {
-                
-                Producto producto = this.buscarProducto(datos.getProductoId());
+            Date date = new Date();
+            orden.setFechaOrden(date);
+
+            orden = this.ordenRepository.save(orden);
+
+            List <DetalleOrdenDTO> detalleOrdenDTOs = datos.getProductos();
+
+            for (DetalleOrdenDTO dOrdenDTO : detalleOrdenDTOs) {
+                Producto producto = this.buscarProducto(dOrdenDTO.getProducto());
 
                 if (producto != null) {
-
-                    this.modificarCantidadIngredientes(producto.getProductoID(), datos.getCantidad());
+                    this.modificarCantidadIngredientes(producto.getProductoID(), dOrdenDTO.getCantidad());
 
                     DetalleOrden detalleOrden = new DetalleOrden();
                     detalleOrden.setProducto(producto);
-                    detalleOrden.setCantidad(datos.getCantidad());
+                    detalleOrden.setCantidad(dOrdenDTO.getCantidad());
+                    detalleOrden.setOrden(orden);
 
-                    Orden orden = new Orden();
-                    Date date = new Date();
-                    orden.setFechaOrden(date);
-                    orden.setCliente(cliente);
-                    orden.setCajero(empleado);
-                    orden.setDetalleOrden(detalleOrden);
-
-                    return this.ordenRepository.save(orden);
-
+                    orden.getDetallesOrden().add(detalleOrden);
                 }
-
             }
 
+            return this.ordenRepository.save(orden);
         }
 
         return null;
     }
-
+    
     private Empleado buscarEmpleado(String id){
         boolean estaEmpleado = this.empleadoRepository.findById(id).isPresent();
 
@@ -117,6 +123,5 @@ public class OrdenServiceImpl implements OrdenService{
         
         }
 
-    }
-    
+    }  
 }
