@@ -29,4 +29,6 @@ public class Producto {
 
     private double precio;
 
+    private String url;
+
 }

@@ -1,5 +1,7 @@
 package hn.unah.lenguajes.restaurante.services;
 
+import java.util.List;
+
 import hn.unah.lenguajes.restaurante.models.Producto;
 
 public interface ProductoService {
@@ -9,5 +11,7 @@ public interface ProductoService {
     public String eliminarProducto(int ProductoID);
 
     public Producto buscaProducto(int ProductoID);
+
+    public List<Producto> obtenerTodos();
     
 }

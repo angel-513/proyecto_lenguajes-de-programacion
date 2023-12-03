@@ -1,5 +1,7 @@
 package hn.unah.lenguajes.restaurante.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,11 @@ public class ProductoController {
     @DeleteMapping("eliminar/{id}")
     public String eliminarPlatillo(@PathVariable(name = "id") int ProductoID){
         return this.productoServiceImpl.eliminarProducto(ProductoID);
+    }
+
+    @GetMapping("/todos")
+    public List<Producto> obtenerTodos(){
+        return this.productoServiceImpl.obtenerTodos();
     }
     
 }

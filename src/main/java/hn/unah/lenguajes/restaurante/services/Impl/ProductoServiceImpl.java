@@ -1,11 +1,15 @@
 package hn.unah.lenguajes.restaurante.services.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import hn.unah.lenguajes.restaurante.models.Producto;
 import hn.unah.lenguajes.restaurante.repositories.ProductoRepository;
 import hn.unah.lenguajes.restaurante.services.ProductoService;
 
+@Service
 public class ProductoServiceImpl implements ProductoService{
     
     @Autowired 
@@ -38,5 +42,10 @@ public class ProductoServiceImpl implements ProductoService{
         }
 
         return null;
+    }
+
+    @Override
+    public List<Producto> obtenerTodos() {
+        return this.productoRepository.findAll();
     }
 }

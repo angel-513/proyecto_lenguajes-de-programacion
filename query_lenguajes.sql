@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS producto (
     ProductoID INT PRIMARY KEY AUTO_INCREMENT,
     NombreProducto VARCHAR(80),
     Precio DECIMAL(10, 2),
+    url VARCHAR(255)
 );
 
 -- Tabla orden
