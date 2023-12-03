@@ -1,5 +1,7 @@
 package hn.unah.lenguajes.restaurante.services.Impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +73,11 @@ public class IngredienteServiceImpl implements IngredienteService{
         }
 
         return "Hubo un problema. No se pudo eliminar el ingrediente solicitado";
+    }
+
+    @Override
+    public List<Ingrediente> obtenerTodos() {
+        return this.ingredienteRepository.findAll();
     }
     
 }

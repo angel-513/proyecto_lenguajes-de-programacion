@@ -1,5 +1,7 @@
 package hn.unah.lenguajes.restaurante.services;
 
+import java.util.List;
+
 import hn.unah.lenguajes.restaurante.dtos.IngredienteDTO;
 import hn.unah.lenguajes.restaurante.models.Ingrediente;
 
@@ -12,5 +14,7 @@ public interface IngredienteService {
     public String actualizarIngrediente(Ingrediente ingrediente);
 
     public String eliminarIngrediente(int id);
+
+    public List<Ingrediente> obtenerTodos();
 
 }
